@@ -163,7 +163,27 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="DetourTransaction\DetourTransaction.cpp" />
+    <ClCompile Include="DynamicLIbrary\DynamicLibrary.cpp" />
+    <ClCompile Include="DynamicLibrary\ExistingDynamicLibrary\ExistingDynamicLibrary.cpp" />
+    <ClCompile Include="Hooks\DetourHook\DetourHook.cpp" />
+    <ClCompile Include="Hooks\IHook\IHook.cpp" />
+    <ClCompile Include="Main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
     <None Include="..\..\Settings\MargAVit.props" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="AutoClose\AutoCloseHandle\AutoCloseHandle.hpp" />
+    <ClInclude Include="AutoClose\AutoCloseObject\AutoCloseObject.hpp" />
+    <ClInclude Include="Common\MargAVitException.hpp" />
+    <ClInclude Include="Common\MargAVitStatus.hpp" />
+    <ClInclude Include="DetourTransaction\DetourTransaction.hpp" />
+    <ClInclude Include="DynamicLIbrary\DynamicLibrary.hpp" />
+    <ClInclude Include="DynamicLibrary\ExistingDynamicLibrary\ExistingDynamicLibrary.hpp" />
+    <ClInclude Include="Hooks\DetourHook\DetourHook.hpp" />
+    <ClInclude Include="Hooks\HookFactory\HookFactory.hpp" />
+    <ClInclude Include="Hooks\IHook\IHook.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

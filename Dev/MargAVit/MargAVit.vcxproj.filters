@@ -1,6 +1,89 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
+    <ClCompile Include="Main.cpp" />
+    <ClCompile Include="DynamicLIbrary\DynamicLibrary.cpp">
+      <Filter>DynamicLibrary</Filter>
+    </ClCompile>
+    <ClCompile Include="DynamicLibrary\ExistingDynamicLibrary\ExistingDynamicLibrary.cpp">
+      <Filter>DynamicLibrary\ExistingDynamicLibrary</Filter>
+    </ClCompile>
+    <ClCompile Include="DetourTransaction\DetourTransaction.cpp" />
+    <ClCompile Include="Hooks\IHook\IHook.cpp">
+      <Filter>Hooks\IHook</Filter>
+    </ClCompile>
+    <ClCompile Include="Hooks\DetourHook\DetourHook.cpp">
+      <Filter>Hooks\DetourHook</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
     <None Include="..\..\Settings\MargAVit.props" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="DetourTransaction">
+      <UniqueIdentifier>{7b0426c8-6847-4081-b415-0806a4ddccfc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common">
+      <UniqueIdentifier>{88b816fe-f90e-4158-be0b-b3e9f438ba3d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Hooks">
+      <UniqueIdentifier>{9793ef4b-09cd-4994-808a-11f2e3612280}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DynamicLibrary">
+      <UniqueIdentifier>{2f75fc4c-2d0c-4dc6-85b0-5682238d02e1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AutoClose">
+      <UniqueIdentifier>{5963ae04-aef6-4991-a812-2e73390adcd0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AutoClose\AutoCloseObject">
+      <UniqueIdentifier>{c9311bc6-71cb-4031-b0f2-2849678507ae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AutoClose\AutoCloseHandle">
+      <UniqueIdentifier>{bfcf4576-a5aa-497d-8612-a696cb247d48}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DynamicLibrary\ExistingDynamicLibrary">
+      <UniqueIdentifier>{19d6ec6c-7175-44f5-946e-a9606d5ce522}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Hooks\HookFactory">
+      <UniqueIdentifier>{3bd4758d-2a08-4439-a3ee-e64d1ef20d8b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Hooks\IHook">
+      <UniqueIdentifier>{bcb9f9f3-fd57-48d1-b713-a7a4e4d55b12}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Hooks\DetourHook">
+      <UniqueIdentifier>{ddf16ca6-c7ad-4f50-bf4a-8be4853efede}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="DetourTransaction\DetourTransaction.hpp">
+      <Filter>DetourTransaction</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\MargAVitException.hpp">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\MargAVitStatus.hpp">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="DynamicLIbrary\DynamicLibrary.hpp">
+      <Filter>DynamicLibrary</Filter>
+    </ClInclude>
+    <ClInclude Include="AutoClose\AutoCloseObject\AutoCloseObject.hpp">
+      <Filter>AutoClose\AutoCloseObject</Filter>
+    </ClInclude>
+    <ClInclude Include="AutoClose\AutoCloseHandle\AutoCloseHandle.hpp">
+      <Filter>AutoClose\AutoCloseHandle</Filter>
+    </ClInclude>
+    <ClInclude Include="DynamicLibrary\ExistingDynamicLibrary\ExistingDynamicLibrary.hpp">
+      <Filter>DynamicLibrary\ExistingDynamicLibrary</Filter>
+    </ClInclude>
+    <ClInclude Include="Hooks\HookFactory\HookFactory.hpp">
+      <Filter>Hooks\HookFactory</Filter>
+    </ClInclude>
+    <ClInclude Include="Hooks\IHook\IHook.hpp">
+      <Filter>Hooks\IHook</Filter>
+    </ClInclude>
+    <ClInclude Include="Hooks\DetourHook\DetourHook.hpp">
+      <Filter>Hooks\DetourHook</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
