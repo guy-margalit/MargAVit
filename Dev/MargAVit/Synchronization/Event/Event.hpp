@@ -3,9 +3,9 @@
 #include <string>
 #include <optional>
 
-#include "AutoCloseObject/AutoCloseObject.hpp"
+#include "Synchronization/ISignalWaitable/ISignalWaitable.hpp"
 
-class Event : public AutoCloseHandle
+class Event : public ISignalWaitable
 {
 public:
 	Event(const std::wstring& event_name, const bool manual_reset, const bool initial_state = false);
@@ -19,15 +19,11 @@ public:
 
 	virtual ~Event() = default;
 
-	void set();
-	void reset();
-	bool is_manual_reset() const;
+	void set() override;
+	void cancel() override;
 
 protected:
 	static HANDLE _s_create_event(const std::optional<std::wstring>& event_name, const bool manual_reset, const bool initial_state);
-
-protected:
-	bool m_manual_reset;
 };
 
 using EventPtr = std::shared_ptr<Event>;

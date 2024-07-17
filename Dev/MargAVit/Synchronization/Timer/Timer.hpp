@@ -2,13 +2,13 @@
 
 #include <optional>
 
-#include "AutoCloseObject/AutoCloseObject.hpp"
+#include "Synchronization/ISignalWaitable/ISignalWaitable.hpp"
 
-class Timer : public AutoCloseHandle
+class Timer : public ISignalWaitable
 {
-	Timer(const std::wstring& timer_name, const bool manual_reset);
+	Timer(const std::wstring& timer_name, const bool manual_reset, int64_t due_time, uint32_t period = 0);
 
-	Timer(const bool manual_reset);
+	Timer(const bool manual_reset, int64_t due_time, uint32_t period = 0);
 
 	Timer(Timer&& other);
 
@@ -17,11 +17,18 @@ class Timer : public AutoCloseHandle
 
 	virtual ~Timer() = default;
 
-	void set(int64_t due_time, uint32_t period = 0);
-	void cancel();
+	void set() override;
+	void cancel() override;
+
+	int64_t get_due_time() const;
+	uint32_t get_period() const;
 
 protected:
 	static HANDLE _s_create_timer(const std::optional<std::wstring>& timer_name, const bool manual_reset);
+
+protected:
+	int64_t m_due_time;
+	uint32_t m_period;
 };
 
 using TimerPtr = std::shared_ptr<Timer>;
