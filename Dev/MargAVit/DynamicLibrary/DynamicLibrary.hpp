@@ -4,9 +4,7 @@
 #include <string>
 #include <Windows.h>
 
-#include "AutoClose/AutoCloseObject/AutoCloseObject.hpp"
-
-using AutoCloseModuleHandle = AutoCloseObject<HMODULE, decltype(FreeLibrary)>;
+#include "AutoCloseObject/AutoCloseObject.hpp"
 
 class DynamicLibrary : public AutoCloseModuleHandle
 {

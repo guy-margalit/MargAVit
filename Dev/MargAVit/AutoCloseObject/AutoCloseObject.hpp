@@ -1,5 +1,6 @@
 #pragma once
 
+#include <Windows.h>
 #include <functional>
 
 template<class ObjectType, class DeleterType>
@@ -60,6 +61,14 @@ public:
 
 protected:
 	ObjectType m_object;
-	const std::function<DeleterType> m_deleter;
+	std::function<DeleterType> m_deleter;
 	bool m_should_free;
 };
+
+using AutoCloseHandle = AutoCloseObject<HANDLE, decltype(CloseHandle)>;
+using AutoCloseHandlePtr = std::shared_ptr<AutoCloseHandle>;
+using AutoCloseHandleUPtr = std::unique_ptr<AutoCloseHandle>;
+
+using AutoCloseModuleHandle = AutoCloseObject<HMODULE, decltype(FreeLibrary)>;
+using AutoCloseModuleHandlePtr = std::shared_ptr<AutoCloseModuleHandle>;
+using AutoCloseModuleHandleUPtr = std::unique_ptr<AutoCloseModuleHandle>;

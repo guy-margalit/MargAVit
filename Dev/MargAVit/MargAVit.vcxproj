@@ -95,6 +95,7 @@
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <ExceptionHandling>Async</ExceptionHandling>
       <TreatWarningAsError>true</TreatWarningAsError>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -114,6 +115,7 @@
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <ExceptionHandling>Async</ExceptionHandling>
       <TreatWarningAsError>true</TreatWarningAsError>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -133,6 +135,7 @@
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <ExceptionHandling>Async</ExceptionHandling>
       <TreatWarningAsError>true</TreatWarningAsError>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -152,6 +155,7 @@
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <ExceptionHandling>Async</ExceptionHandling>
       <TreatWarningAsError>true</TreatWarningAsError>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -163,27 +167,28 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="DetourTransaction\DetourTransaction.cpp" />
     <ClCompile Include="DynamicLIbrary\DynamicLibrary.cpp" />
-    <ClCompile Include="DynamicLibrary\ExistingDynamicLibrary\ExistingDynamicLibrary.cpp" />
     <ClCompile Include="Hooks\DetourHook\DetourHook.cpp" />
+    <ClCompile Include="Hooks\DetourHook\DetourTransaction\DetourTransaction.cpp" />
     <ClCompile Include="Hooks\IHook\IHook.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Synchronization\Event\Event.cpp" />
+    <ClCompile Include="Synchronization\Timer\Timer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\Settings\MargAVit.props" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AutoClose\AutoCloseHandle\AutoCloseHandle.hpp" />
-    <ClInclude Include="AutoClose\AutoCloseObject\AutoCloseObject.hpp" />
+    <ClInclude Include="AutoCloseObject\AutoCloseObject.hpp" />
     <ClInclude Include="Common\MargAVitException.hpp" />
     <ClInclude Include="Common\MargAVitStatus.hpp" />
-    <ClInclude Include="DetourTransaction\DetourTransaction.hpp" />
     <ClInclude Include="DynamicLIbrary\DynamicLibrary.hpp" />
-    <ClInclude Include="DynamicLibrary\ExistingDynamicLibrary\ExistingDynamicLibrary.hpp" />
     <ClInclude Include="Hooks\DetourHook\DetourHook.hpp" />
+    <ClInclude Include="Hooks\DetourHook\DetourTransaction\DetourTransaction.hpp" />
     <ClInclude Include="Hooks\HookFactory\HookFactory.hpp" />
     <ClInclude Include="Hooks\IHook\IHook.hpp" />
+    <ClInclude Include="Synchronization\Event\Event.hpp" />
+    <ClInclude Include="Synchronization\Timer\Timer.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -5,24 +5,26 @@
     <ClCompile Include="DynamicLIbrary\DynamicLibrary.cpp">
       <Filter>DynamicLibrary</Filter>
     </ClCompile>
-    <ClCompile Include="DynamicLibrary\ExistingDynamicLibrary\ExistingDynamicLibrary.cpp">
-      <Filter>DynamicLibrary\ExistingDynamicLibrary</Filter>
-    </ClCompile>
-    <ClCompile Include="DetourTransaction\DetourTransaction.cpp" />
     <ClCompile Include="Hooks\IHook\IHook.cpp">
       <Filter>Hooks\IHook</Filter>
     </ClCompile>
     <ClCompile Include="Hooks\DetourHook\DetourHook.cpp">
       <Filter>Hooks\DetourHook</Filter>
     </ClCompile>
+    <ClCompile Include="Hooks\DetourHook\DetourTransaction\DetourTransaction.cpp">
+      <Filter>Hooks\DetourHook\DetourTransaction</Filter>
+    </ClCompile>
+    <ClCompile Include="Synchronization\Event\Event.cpp">
+      <Filter>Sychronization\Event</Filter>
+    </ClCompile>
+    <ClCompile Include="Synchronization\Timer\Timer.cpp">
+      <Filter>Sychronization\Timer</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\Settings\MargAVit.props" />
   </ItemGroup>
   <ItemGroup>
-    <Filter Include="DetourTransaction">
-      <UniqueIdentifier>{7b0426c8-6847-4081-b415-0806a4ddccfc}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Common">
       <UniqueIdentifier>{88b816fe-f90e-4158-be0b-b3e9f438ba3d}</UniqueIdentifier>
     </Filter>
@@ -31,18 +33,6 @@
     </Filter>
     <Filter Include="DynamicLibrary">
       <UniqueIdentifier>{2f75fc4c-2d0c-4dc6-85b0-5682238d02e1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="AutoClose">
-      <UniqueIdentifier>{5963ae04-aef6-4991-a812-2e73390adcd0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="AutoClose\AutoCloseObject">
-      <UniqueIdentifier>{c9311bc6-71cb-4031-b0f2-2849678507ae}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="AutoClose\AutoCloseHandle">
-      <UniqueIdentifier>{bfcf4576-a5aa-497d-8612-a696cb247d48}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="DynamicLibrary\ExistingDynamicLibrary">
-      <UniqueIdentifier>{19d6ec6c-7175-44f5-946e-a9606d5ce522}</UniqueIdentifier>
     </Filter>
     <Filter Include="Hooks\HookFactory">
       <UniqueIdentifier>{3bd4758d-2a08-4439-a3ee-e64d1ef20d8b}</UniqueIdentifier>
@@ -53,11 +43,23 @@
     <Filter Include="Hooks\DetourHook">
       <UniqueIdentifier>{ddf16ca6-c7ad-4f50-bf4a-8be4853efede}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Sychronization">
+      <UniqueIdentifier>{3c0aced9-7ff4-4ef0-affc-0967140f73f2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Hooks\DetourHook\DetourTransaction">
+      <UniqueIdentifier>{7b0426c8-6847-4081-b415-0806a4ddccfc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sychronization\Event">
+      <UniqueIdentifier>{cb5aac90-17a1-461e-b609-a5f9d15e5a98}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sychronization\Timer">
+      <UniqueIdentifier>{51deb8d4-7c9e-4af5-a1b3-b0c0a4c7f067}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AutoCloseObject">
+      <UniqueIdentifier>{c9311bc6-71cb-4031-b0f2-2849678507ae}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="DetourTransaction\DetourTransaction.hpp">
-      <Filter>DetourTransaction</Filter>
-    </ClInclude>
     <ClInclude Include="Common\MargAVitException.hpp">
       <Filter>Common</Filter>
     </ClInclude>
@@ -67,15 +69,6 @@
     <ClInclude Include="DynamicLIbrary\DynamicLibrary.hpp">
       <Filter>DynamicLibrary</Filter>
     </ClInclude>
-    <ClInclude Include="AutoClose\AutoCloseObject\AutoCloseObject.hpp">
-      <Filter>AutoClose\AutoCloseObject</Filter>
-    </ClInclude>
-    <ClInclude Include="AutoClose\AutoCloseHandle\AutoCloseHandle.hpp">
-      <Filter>AutoClose\AutoCloseHandle</Filter>
-    </ClInclude>
-    <ClInclude Include="DynamicLibrary\ExistingDynamicLibrary\ExistingDynamicLibrary.hpp">
-      <Filter>DynamicLibrary\ExistingDynamicLibrary</Filter>
-    </ClInclude>
     <ClInclude Include="Hooks\HookFactory\HookFactory.hpp">
       <Filter>Hooks\HookFactory</Filter>
     </ClInclude>
@@ -84,6 +77,18 @@
     </ClInclude>
     <ClInclude Include="Hooks\DetourHook\DetourHook.hpp">
       <Filter>Hooks\DetourHook</Filter>
+    </ClInclude>
+    <ClInclude Include="Hooks\DetourHook\DetourTransaction\DetourTransaction.hpp">
+      <Filter>Hooks\DetourHook\DetourTransaction</Filter>
+    </ClInclude>
+    <ClInclude Include="Synchronization\Event\Event.hpp">
+      <Filter>Sychronization\Event</Filter>
+    </ClInclude>
+    <ClInclude Include="Synchronization\Timer\Timer.hpp">
+      <Filter>Sychronization\Timer</Filter>
+    </ClInclude>
+    <ClInclude Include="AutoCloseObject\AutoCloseObject.hpp">
+      <Filter>AutoCloseObject</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

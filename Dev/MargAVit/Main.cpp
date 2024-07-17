@@ -3,7 +3,7 @@
 
 #include "Hooks/DetourHook/DetourHook.hpp"
 #include "Hooks/HookFactory/HookFactory.hpp"
-#include "DynamicLibrary/ExistingDynamicLibrary/ExistingDynamicLibrary.hpp"
+#include "DynamicLibrary/DynamicLibrary.hpp"
 
 #define PAGE_EXECUTE_ALL (PAGE_EXECUTE | \
 						  PAGE_EXECUTE_READ | \
@@ -40,7 +40,7 @@ HOOK_NtAllocateVirtualMemory(
 	{
 		wprintf_s(L"SUCCESS\n");
 	}
-
+	
 	return reinterpret_cast<PFN_NT_ALLOCATE_VIRTUAL_MEMORY>(g_hook->get_source())(
 		hProcess,
 		pvBaseAddress,
@@ -58,8 +58,8 @@ DllMain(
 	LPVOID lpvReserved
 )
 {
-	const DynamicLibraryUPtr ntdll = std::make_unique<ExistingDynamicLibrary>("ntdll.dll");
 	const auto hook_factory = std::make_unique<HookFactory<DetourHook>>();
+	const DynamicLibraryUPtr ntdll = std::make_unique<DynamicLibrary>("ntdll.dll");
 
 	UNREFERENCED_PARAMETER(hInstance);
 	UNREFERENCED_PARAMETER(lpvReserved);
