@@ -23,6 +23,9 @@
     <ClCompile Include="Synchronization\ISignalWaitable\ISignalWaitable.cpp">
       <Filter>Sychronization\ISignalWaitable</Filter>
     </ClCompile>
+    <ClCompile Include="Thread\Thread.cpp">
+      <Filter>Thread</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\Settings\MargAVit.props" />
@@ -64,6 +67,9 @@
     <Filter Include="Sychronization\ISignalWaitable">
       <UniqueIdentifier>{c7668fbd-894c-4f2f-8d6d-defadab5039e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Thread">
+      <UniqueIdentifier>{e2427557-1abe-47d8-8fcb-555d9765d294}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Common\MargAVitException.hpp">
@@ -98,6 +104,9 @@
     </ClInclude>
     <ClInclude Include="Synchronization\ISignalWaitable\ISignalWaitable.hpp">
       <Filter>Sychronization\ISignalWaitable</Filter>
+    </ClInclude>
+    <ClInclude Include="Thread\Thread.hpp">
+      <Filter>Thread</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -6,6 +6,7 @@
 
 class Timer : public ISignalWaitable
 {
+public:
 	Timer(const std::wstring& timer_name, const bool manual_reset, int64_t due_time, uint32_t period = 0);
 
 	Timer(const bool manual_reset, int64_t due_time, uint32_t period = 0);
@@ -27,7 +28,7 @@ protected:
 	static HANDLE _s_create_timer(const std::optional<std::wstring>& timer_name, const bool manual_reset);
 
 protected:
-	int64_t m_due_time;
+	int64_t m_due_time;  // 100 nanoseconds
 	uint32_t m_period;
 };
 

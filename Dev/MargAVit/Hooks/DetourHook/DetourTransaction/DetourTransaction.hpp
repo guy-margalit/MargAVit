@@ -38,7 +38,7 @@ void DetourTransaction::add_detour(FuncType* source, const FuncType destination)
 	const ULONG status = DetourAttach(source, reinterpret_cast<PVOID>(destination));
 	if (NO_ERROR != status)
 	{
-		throw MargAVitException(MargAVitStatus::MARGAVITSTATUS_DETOURTRANSACTION_ADD_DETOUR_DETOURATTACH_FAILED, static_cast<uint32_t>(status));
+		throw MargAVitException(MARGAVITSTATUS_DETOURTRANSACTION_ADD_DETOUR_DETOURATTACH_FAILED, static_cast<uint32_t>(status));
 	}
 }
 
@@ -48,6 +48,6 @@ void DetourTransaction::remove_detour(FuncType* source, const FuncType destinati
 	const ULONG status = DetourDetach(source, reinterpret_cast<PVOID>(destination));
 	if (NO_ERROR != status)
 	{
-		throw MargAVitException(MargAVitStatus::MARGAVITSTATUS_DETOURTRANSACTION_REMOVE_DETOUR_DETOURDETACH_FAILED, static_cast<uint32_t>(status));
+		throw MargAVitException(MARGAVITSTATUS_DETOURTRANSACTION_REMOVE_DETOUR_DETOURDETACH_FAILED, static_cast<uint32_t>(status));
 	}
 }

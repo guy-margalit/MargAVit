@@ -34,7 +34,7 @@ void Timer::set()
 		nullptr,
 		false))
 	{
-		throw MargAVitException(MargAVitStatus::MARGAVITSTATUS_TIMER_SET_SETWAITABLETIMER_FAILED, GetLastError());
+		throw MargAVitException(MARGAVITSTATUS_TIMER_SET_SETWAITABLETIMER_FAILED, GetLastError());
 	}
 }
 
@@ -42,7 +42,7 @@ void Timer::cancel()
 {
 	if (!CancelWaitableTimer(m_object))
 	{
-		throw MargAVitException(MargAVitStatus::MARGAVITSTATUS_TIMER_CANCEL_CANCELWAITABLETIMER_FAILED, GetLastError());
+		throw MargAVitException(MARGAVITSTATUS_TIMER_CANCEL_CANCELWAITABLETIMER_FAILED, GetLastError());
 	}
 }
 
@@ -61,7 +61,7 @@ HANDLE Timer::_s_create_timer(const std::optional<std::wstring>& timer_name, con
 	const HANDLE timer_handle = CreateWaitableTimerW(nullptr, manual_reset, timer_name.has_value() ? timer_name->c_str() : nullptr);
 	if (nullptr == timer_handle)
 	{
-		throw MargAVitException(MargAVitStatus::MARGAVITSTATUS_TIMER_S_CREATE_TIMER_CREATEWATABLETIMERW_FAILED, GetLastError());
+		throw MargAVitException(MARGAVITSTATUS_TIMER_S_CREATE_TIMER_CREATEWATABLETIMERW_FAILED, GetLastError());
 	}
 
 	return timer_handle;

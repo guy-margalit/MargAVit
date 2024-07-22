@@ -6,13 +6,13 @@ DetourTransaction::DetourTransaction(const HANDLE thread) :
 	ULONG status = DetourTransactionBegin();
 	if (NO_ERROR != status)
 	{
-		throw MargAVitException(MargAVitStatus::MARGAVITSTATUS_DETOURTRANSACTION_CTOR_DETOURTRANSACTIONBEGIN_FAILED, static_cast<uint32_t>(status));
+		throw MargAVitException(MARGAVITSTATUS_DETOURTRANSACTION_CTOR_DETOURTRANSACTIONBEGIN_FAILED, static_cast<uint32_t>(status));
 	}
 
 	status = DetourUpdateThread(nullptr == thread ? GetCurrentThread() : thread);
 	if (NO_ERROR != status)
 	{
-		throw MargAVitException(MargAVitStatus::MARGAVITSTATUS_DETOURTRANSACTION_CTOR_DETOURUPDATETHREAD_FAILED, static_cast<uint32_t>(status));
+		throw MargAVitException(MARGAVITSTATUS_DETOURTRANSACTION_CTOR_DETOURUPDATETHREAD_FAILED, static_cast<uint32_t>(status));
 	}
 }
 
@@ -32,7 +32,7 @@ void DetourTransaction::commit()
 		const ULONG status = DetourTransactionCommit();
 		if (NO_ERROR != status)
 		{
-			throw MargAVitException(MargAVitStatus::MARGAVITSTATUS_DETOURTRANSACTION_COMMIT_DETOURTRANSACTIONCOMMIT_FAILED, static_cast<DWORD>(status));
+			throw MargAVitException(MARGAVITSTATUS_DETOURTRANSACTION_COMMIT_DETOURTRANSACTIONCOMMIT_FAILED, static_cast<DWORD>(status));
 		}
 
 		m_commited = true;
