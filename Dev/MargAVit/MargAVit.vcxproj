@@ -107,6 +107,9 @@
       <AdditionalDependencies>detours.lib;bcrypt.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(DETOURS_PATH)lib.$(PlatformTarget)</AdditionalLibraryDirectories>
     </Link>
+    <PostBuildEvent>
+      <Command>$(MARGAVIT_ROOT)Scripts\Build\upx.exe $(TargetPath)</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -129,6 +132,9 @@
       <AdditionalDependencies>detours.lib;bcrypt.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(DETOURS_PATH)lib.$(PlatformTarget)</AdditionalLibraryDirectories>
     </Link>
+    <PostBuildEvent>
+      <Command>$(MARGAVIT_ROOT)Scripts\Build\upx.exe $(TargetPath)</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -147,6 +153,9 @@
       <AdditionalDependencies>detours.lib;bcrypt.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(DETOURS_PATH)lib.$(PlatformTarget)</AdditionalLibraryDirectories>
     </Link>
+    <PostBuildEvent>
+      <Command>$(MARGAVIT_ROOT)Scripts\Build\upx.exe $(TargetPath)</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -169,6 +178,9 @@
       <AdditionalDependencies>detours.lib;bcrypt.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(DETOURS_PATH)lib.$(PlatformTarget)</AdditionalLibraryDirectories>
     </Link>
+    <PostBuildEvent>
+      <Command>$(MARGAVIT_ROOT)Scripts\Build\upx.exe $(TargetPath)</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="DynamicLIbrary\DynamicLibrary.cpp" />
