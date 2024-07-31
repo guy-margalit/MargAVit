@@ -5,12 +5,6 @@
     <ClCompile Include="DynamicLIbrary\DynamicLibrary.cpp">
       <Filter>DynamicLibrary</Filter>
     </ClCompile>
-    <ClCompile Include="Hooks\IHook\IHook.cpp">
-      <Filter>Hooks\IHook</Filter>
-    </ClCompile>
-    <ClCompile Include="Hooks\DetourHook\DetourHook.cpp">
-      <Filter>Hooks\DetourHook</Filter>
-    </ClCompile>
     <ClCompile Include="Hooks\DetourHook\DetourTransaction\DetourTransaction.cpp">
       <Filter>Hooks\DetourHook\DetourTransaction</Filter>
     </ClCompile>
@@ -40,9 +34,6 @@
     <Filter Include="DynamicLibrary">
       <UniqueIdentifier>{2f75fc4c-2d0c-4dc6-85b0-5682238d02e1}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Hooks\HookFactory">
-      <UniqueIdentifier>{3bd4758d-2a08-4439-a3ee-e64d1ef20d8b}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Hooks\IHook">
       <UniqueIdentifier>{bcb9f9f3-fd57-48d1-b713-a7a4e4d55b12}</UniqueIdentifier>
     </Filter>
@@ -70,6 +61,9 @@
     <Filter Include="Thread">
       <UniqueIdentifier>{e2427557-1abe-47d8-8fcb-555d9765d294}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Hooks\Hooker">
+      <UniqueIdentifier>{06f9c653-4823-4bf3-b72f-d5d47c7f88c2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Common\MargAVitException.hpp">
@@ -80,9 +74,6 @@
     </ClInclude>
     <ClInclude Include="DynamicLIbrary\DynamicLibrary.hpp">
       <Filter>DynamicLibrary</Filter>
-    </ClInclude>
-    <ClInclude Include="Hooks\HookFactory\HookFactory.hpp">
-      <Filter>Hooks\HookFactory</Filter>
     </ClInclude>
     <ClInclude Include="Hooks\IHook\IHook.hpp">
       <Filter>Hooks\IHook</Filter>
@@ -107,6 +98,15 @@
     </ClInclude>
     <ClInclude Include="Thread\Thread.hpp">
       <Filter>Thread</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\NtDll.hpp">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Hooks\Hooker\Hooker.hpp">
+      <Filter>Hooks\Hooker</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Common.hpp">
+      <Filter>Common</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
