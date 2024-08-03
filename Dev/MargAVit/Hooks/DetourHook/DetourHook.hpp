@@ -9,16 +9,21 @@ template<typename RetType, typename... ArgsType>
 class DetourHook : public IHook<RetType, ArgsType...>
 {
 protected:
-	using FuncPtrType = IHook<RetType, ArgsType...>::FuncPtrType;
-	using DestinationPtrType = IHook<RetType, ArgsType...>::DestinationPtrType;
+	using IHookSuper = IHook<RetType, ArgsType...>;
+	using FuncPtrType = IHookSuper::FuncPtrType;
+	using DestinationPtrType = IHookSuper::DestinationPtrType;
 
 public:
 	DetourHook(const FuncPtrType source, const DestinationPtrType destination = nullptr) :
-		IHook<RetType, ArgsType...>(source, destination)
+		IHookSuper(source, destination)
 	{}
 
 	DetourHook(const DynamicLibraryUPtr& library, const std::string& function_name, const DestinationPtrType destination = nullptr) :
-		IHook<RetType, ArgsType...>(library, function_name, destination)
+		IHookSuper(library, function_name, destination)
+	{}
+
+	DetourHook(const std::string& library_name, const std::string& function_name, const DestinationPtrType destination = nullptr) :
+		IHookSuper(library_name, function_name, destination)
 	{}
 
 	DetourHook(DetourHook&&) = default;

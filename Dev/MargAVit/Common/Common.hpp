@@ -1,12 +1,9 @@
 #pragma once
 
+#include <cstdio>
+
+#include "config.auto.h"
 #include "Common/MargAVitException.hpp"
-
-#define SECOND_IN_MILLISECONDS (1000)
-
-#define MILLISECOND_IN_100_NANOSECONDS (10000)
-
-#define SECOND_IN_100_NANOSECONDS (SECOND_IN_MILLISECONDS * MILLISECOND_IN_100_NANOSECONDS)
 
 #define NTSTATUS_SUCCESS (0)
 
@@ -14,3 +11,5 @@
 						  PAGE_EXECUTE_READ | \
 						  PAGE_EXECUTE_READWRITE | \
 						  PAGE_EXECUTE_WRITECOPY)
+
+#define LOG(message) (wprintf_s(message"\n"))

@@ -75,25 +75,25 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(ProjectDir);$(DETOURS_PATH)src</IncludePath>
+    <IncludePath>$(MARGAVIT_AUTO_GENERATED);$(VC_IncludePath);$(WindowsSDK_IncludePath);$(ProjectDir);$(DETOURS_PATH)src</IncludePath>
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(ProjectDir);$(DETOURS_PATH)src</IncludePath>
+    <IncludePath>$(MARGAVIT_AUTO_GENERATED);$(VC_IncludePath);$(WindowsSDK_IncludePath);$(ProjectDir);$(DETOURS_PATH)src</IncludePath>
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(ProjectDir);$(DETOURS_PATH)src</IncludePath>
+    <IncludePath>$(MARGAVIT_AUTO_GENERATED);$(VC_IncludePath);$(WindowsSDK_IncludePath);$(ProjectDir);$(DETOURS_PATH)src</IncludePath>
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(ProjectDir);$(DETOURS_PATH)src</IncludePath>
+    <IncludePath>$(MARGAVIT_AUTO_GENERATED);$(VC_IncludePath);$(WindowsSDK_IncludePath);$(ProjectDir);$(DETOURS_PATH)src</IncludePath>
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level4</WarningLevel>
-      <SDLCheck>true</SDLCheck>
+      <SDLCheck>false</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
@@ -101,29 +101,39 @@
       <TreatWarningAsError>true</TreatWarningAsError>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>false</FunctionLevelLinking>
+      <BufferSecurityCheck>false</BufferSecurityCheck>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>detours.lib;bcrypt.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(DETOURS_PATH)lib.$(PlatformTarget)</AdditionalLibraryDirectories>
+      <LinkTimeCodeGeneration>Default</LinkTimeCodeGeneration>
     </Link>
     <PostBuildEvent>
-      <Command>$(MARGAVIT_ROOT)Scripts\Build\upx.exe $(TargetPath)</Command>
+      <Command>$(MARGAVIT_BUILD_SCRIPTS)upx.exe $(TargetPath)</Command>
     </PostBuildEvent>
+    <PreBuildEvent>
+      <Command>python $(MARGAVIT_BUILD_SCRIPTS)build_config.py --config-header-path $(MARGAVIT_AUTO_GENERATED)config.auto.h</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
       <WarningLevel>Level4</WarningLevel>
-      <FunctionLevelLinking>true</FunctionLevelLinking>
-      <IntrinsicFunctions>true</IntrinsicFunctions>
-      <SDLCheck>true</SDLCheck>
+      <FunctionLevelLinking>false</FunctionLevelLinking>
+      <IntrinsicFunctions>false</IntrinsicFunctions>
+      <SDLCheck>false</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <ExceptionHandling>Async</ExceptionHandling>
       <TreatWarningAsError>true</TreatWarningAsError>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <DebugInformationFormat>None</DebugInformationFormat>
+      <BufferSecurityCheck>false</BufferSecurityCheck>
+      <Optimization>Disabled</Optimization>
+      <WholeProgramOptimization>false</WholeProgramOptimization>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -132,15 +142,19 @@
       <GenerateDebugInformation>false</GenerateDebugInformation>
       <AdditionalDependencies>detours.lib;bcrypt.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(DETOURS_PATH)lib.$(PlatformTarget)</AdditionalLibraryDirectories>
+      <LinkTimeCodeGeneration>Default</LinkTimeCodeGeneration>
     </Link>
     <PostBuildEvent>
-      <Command>$(MARGAVIT_ROOT)Scripts\Build\upx.exe $(TargetPath)</Command>
+      <Command>$(MARGAVIT_BUILD_SCRIPTS)upx.exe $(TargetPath)</Command>
     </PostBuildEvent>
+    <PreBuildEvent>
+      <Command>python $(MARGAVIT_BUILD_SCRIPTS)build_config.py --config-header-path $(MARGAVIT_AUTO_GENERATED)config.auto.h</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <WarningLevel>Level4</WarningLevel>
-      <SDLCheck>true</SDLCheck>
+      <SDLCheck>false</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
@@ -148,29 +162,39 @@
       <TreatWarningAsError>true</TreatWarningAsError>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>false</FunctionLevelLinking>
+      <BufferSecurityCheck>false</BufferSecurityCheck>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>detours.lib;bcrypt.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(DETOURS_PATH)lib.$(PlatformTarget)</AdditionalLibraryDirectories>
+      <LinkTimeCodeGeneration>Default</LinkTimeCodeGeneration>
     </Link>
     <PostBuildEvent>
-      <Command>$(MARGAVIT_ROOT)Scripts\Build\upx.exe $(TargetPath)</Command>
+      <Command>$(MARGAVIT_BUILD_SCRIPTS)upx.exe $(TargetPath)</Command>
     </PostBuildEvent>
+    <PreBuildEvent>
+      <Command>python $(MARGAVIT_BUILD_SCRIPTS)build_config.py --config-header-path $(MARGAVIT_AUTO_GENERATED)config.auto.h</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
       <WarningLevel>Level4</WarningLevel>
-      <FunctionLevelLinking>true</FunctionLevelLinking>
-      <IntrinsicFunctions>true</IntrinsicFunctions>
-      <SDLCheck>true</SDLCheck>
+      <FunctionLevelLinking>false</FunctionLevelLinking>
+      <IntrinsicFunctions>false</IntrinsicFunctions>
+      <SDLCheck>false</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <ExceptionHandling>Async</ExceptionHandling>
       <TreatWarningAsError>true</TreatWarningAsError>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <DebugInformationFormat>None</DebugInformationFormat>
+      <BufferSecurityCheck>false</BufferSecurityCheck>
+      <Optimization>Disabled</Optimization>
+      <WholeProgramOptimization>false</WholeProgramOptimization>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -179,10 +203,14 @@
       <GenerateDebugInformation>false</GenerateDebugInformation>
       <AdditionalDependencies>detours.lib;bcrypt.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(DETOURS_PATH)lib.$(PlatformTarget)</AdditionalLibraryDirectories>
+      <LinkTimeCodeGeneration>Default</LinkTimeCodeGeneration>
     </Link>
     <PostBuildEvent>
-      <Command>$(MARGAVIT_ROOT)Scripts\Build\upx.exe $(TargetPath)</Command>
+      <Command>$(MARGAVIT_BUILD_SCRIPTS)upx.exe $(TargetPath)</Command>
     </PostBuildEvent>
+    <PreBuildEvent>
+      <Command>python $(MARGAVIT_BUILD_SCRIPTS)build_config.py --config-header-path $(MARGAVIT_AUTO_GENERATED)config.auto.h</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="DynamicLIbrary\DynamicLibrary.cpp" />
@@ -197,6 +225,7 @@
     <None Include="..\..\Settings\MargAVit.props" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\Common\AutoGenerated\config.auto.h" />
     <ClInclude Include="AutoCloseObject\AutoCloseObject.hpp" />
     <ClInclude Include="Common\Common.hpp" />
     <ClInclude Include="Common\MargAVitException.hpp" />

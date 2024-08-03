@@ -57,6 +57,10 @@ public:
 		IHook(reinterpret_cast<FuncPtrType>(library->get_function(function_name)), destination)
 	{}
 
+	IHook(const std::string& library_name, const std::string& function_name, const DestinationPtrType destination = nullptr) :
+		IHook(std::make_unique<DynamicLibrary>(library_name), function_name, destination)
+	{}
+
 	virtual ~IHook()
 	{
 		try

@@ -1,0 +1,18 @@
+{
+  "MinimumAlertTimeS": 2,
+  "MaximumAlertTimeS": 3,
+  "TimersCount": 100,
+  "AlertTimerIndex": 34,
+  "HookType": "DetourHook",
+  "Hooks": {
+    "ntdll.dll": [
+      "LdrLoadDll",
+      "LdrUnloadDll",
+      "LdrGetProcedureAddress",
+      "RtlAdjustPrivilege",
+      "RtlGetAce",
+      "NtCreateFile",
+      "NtCreateProcess"
+    ]
+  }
+}

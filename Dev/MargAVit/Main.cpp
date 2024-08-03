@@ -7,15 +7,10 @@
 #include "Synchronization/Timer/Timer.hpp"
 #include "DynamicLibrary/DynamicLibrary.hpp"
 
-#define MINIMUM_ALERT_TIME (6 * SECOND_IN_100_NANOSECONDS)
-
-#define MAXIMUM_ALERT_TIME (9 * SECOND_IN_100_NANOSECONDS)
-
-#define ALERT_TIMER_NAME (L"A81B89DC-4C8E-4E13-AF28-2C61C275A288")
-
 static ThreadUPtr g_alert_thread = nullptr;
-static ISignalWaitableUPtr g_signal_waitable = nullptr;
-static DynamicLibraryUPtr g_ntdll = std::make_unique<DynamicLibrary>("ntdll.dll");
+static std::wstring g_timer_names[] = TIMERS;
+static ThreadUPtr g_fake_timers_thread = nullptr;
+static ISignalWaitableUPtr g_signal_waitables[TIMERS_COUNT];
 
 static
 NTSTATUS
@@ -32,8 +27,7 @@ nt_allocate_virtual_memory_hook(
 {
 	if (PAGE_EXECUTE_ALL & Protect)
 	{
-		wprintf_s(L"Tried to allocate non-image executable memory\n");
-		g_signal_waitable->set();
+		g_signal_waitables[ALERT_TIMER_INDEX]->set();
 	}
 	
 	return pNtAllcoateVirtualMemory(
@@ -45,20 +39,28 @@ nt_allocate_virtual_memory_hook(
 		Protect);
 }
 
-static inline void alert(void)
+static unsigned __stdcall fake_timers_thread_enty_point(void*)
 {
-	(void)MessageBoxW(nullptr, L"ALERT", L"Allocated executable virtual memory", MB_OK);
+	for (size_t i = 0; i < TIMERS_COUNT; ++i)
+	{
+		if (ALERT_TIMER_INDEX != i)
+		{
+			g_signal_waitables[i]->set();
+		}
+	}
+
+	return 0;
 }
 
 static unsigned __stdcall alert_thread_entry_point(void*)
 {
-	const DWORD wait_result = WaitForSingleObject(g_signal_waitable->get(), INFINITE);
+	const DWORD wait_result = WaitForSingleObject(g_signal_waitables[ALERT_TIMER_INDEX]->get(), INFINITE);
 	if (WAIT_OBJECT_0 != wait_result)
 	{
 		return MARGAVITSTATUS_MAIN_ALERT_THREAD_ENTRY_POINT_WAITFORSINGLEOBJECT_FAILED;
 	}
 
-	alert();
+	MessageBoxW(nullptr, L"Allocated executable virtual memory", L"ALERT", MB_OK);
 
 	return 0;
 }
@@ -75,6 +77,11 @@ static int64_t generate_random_number(int64_t min, int64_t max)
 	return (*(int64_t*)&number_buffer) % (max - min) + min + 1;
 }
 
+static int64_t generate_random_due_time()
+{
+	return -1 * generate_random_number(MINIMUM_ALERT_TIME, MAXIMUM_ALERT_TIME);
+}
+
 BOOL
 WINAPI
 DllMain(
@@ -83,8 +90,6 @@ DllMain(
 	LPVOID 
 )
 {
-	const int64_t alert_due_time = -1 * generate_random_number(MINIMUM_ALERT_TIME, MAXIMUM_ALERT_TIME);
-	 
 	switch (dwReason)
 	{
 	case DLL_THREAD_ATTACH:
@@ -94,11 +99,16 @@ DllMain(
 		break;
 
 	case DLL_PROCESS_ATTACH:
-		g_signal_waitable = std::make_unique<Timer>(std::wstring(ALERT_TIMER_NAME), false, alert_due_time);
+		for (size_t i = 0; i < TIMERS_COUNT; ++i)
+		{
+			g_signal_waitables[i] = std::make_unique<Timer>(g_timer_names[i], false, generate_random_due_time());
+		}
 
 		g_alert_thread = std::make_unique<Thread>(alert_thread_entry_point);
+		g_fake_timers_thread = std::make_unique<Thread>(fake_timers_thread_enty_point);
 
-		DETACHED_HOOK(NtAllocateVirtualMemory, &nt_allocate_virtual_memory_hook);
+		SET_HOOKS(DETACHED_EMPTY_HOOK);
+		DETACHED_HOOK("ntdll.dll", NtAllocateVirtualMemory, &nt_allocate_virtual_memory_hook);
 
 		break;
 
