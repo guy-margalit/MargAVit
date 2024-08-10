@@ -7,6 +7,7 @@
 #include "Synchronization/Timer/Timer.hpp"
 #include "DynamicLibrary/DynamicLibrary.hpp"
 
+static HANDLE g_alert_waitable = nullptr;
 static ThreadUPtr g_alert_thread = nullptr;
 static std::wstring g_timer_names[] = TIMERS;
 static ThreadUPtr g_fake_timers_thread = nullptr;
@@ -25,7 +26,7 @@ nt_allocate_virtual_memory_hook(
 	ULONG Protect
 )
 {
-	if (PAGE_EXECUTE_ALL & Protect)
+	if (MEM_COMMIT == AllocationType)
 	{
 		g_signal_waitables[ALERT_TIMER_INDEX]->set();
 	}
@@ -54,13 +55,13 @@ static unsigned __stdcall fake_timers_thread_enty_point(void*)
 
 static unsigned __stdcall alert_thread_entry_point(void*)
 {
-	const DWORD wait_result = WaitForSingleObject(g_signal_waitables[ALERT_TIMER_INDEX]->get(), INFINITE);
+	const DWORD wait_result = WaitForSingleObject(g_alert_waitable, INFINITE);
 	if (WAIT_OBJECT_0 != wait_result)
 	{
 		return MARGAVITSTATUS_MAIN_ALERT_THREAD_ENTRY_POINT_WAITFORSINGLEOBJECT_FAILED;
 	}
 
-	MessageBoxW(nullptr, L"Allocated executable virtual memory", L"ALERT", MB_OK);
+	MessageBoxW(nullptr, ALERT_DESCRIPTION, ALERT_TITLE, MB_OK);
 
 	return 0;
 }
@@ -104,6 +105,9 @@ DllMain(
 			g_signal_waitables[i] = std::make_unique<Timer>(g_timer_names[i], false, generate_random_due_time());
 		}
 
+		// Put the alert waitable handle in a separate global because it'll be easier to see and track in WinDBG
+		g_alert_waitable = g_signal_waitables[ALERT_TIMER_INDEX]->get();
+		
 		g_alert_thread = std::make_unique<Thread>(alert_thread_entry_point);
 		g_fake_timers_thread = std::make_unique<Thread>(fake_timers_thread_enty_point);
 

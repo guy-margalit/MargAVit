@@ -1,8 +1,10 @@
 {
   "MinimumAlertTimeS": 2,
-  "MaximumAlertTimeS": 3,
-  "TimersCount": 100,
-  "AlertTimerIndex": 34,
+  "MaximumAlertTimeS": 5,
+  "TimersCount": 150,
+  "AlertTimerIndex": 81,
+  "AlertTitle": "ALERT",
+  "AlertDescription": "Detected suspicious activity",
   "HookType": "DetourHook",
   "Hooks": {
     "ntdll.dll": [
@@ -12,7 +14,9 @@
       "RtlAdjustPrivilege",
       "RtlGetAce",
       "NtCreateFile",
-      "NtCreateProcess"
+      "NtCreateProcess",
+      "NtQueryEvent",
+      "NtOpenKey"
     ]
   }
 }

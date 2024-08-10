@@ -81,6 +81,8 @@ def generate_config_header(config_json, template_header_path):
 		Timers=format_timer_names_list(generate_random_timer_names(config_json.TimersCount)),
 		TimersCount=config_json.TimersCount,
 		AlertTimerIndex=config_json.AlertTimerIndex,
+		AlertTitle=config_json.AlertTitle,
+		AlertDescription=config_json.AlertDescription,
 		HookType=config_json.HookType,
 		Hooks=format_hooks_list(generate_hooks_list(config_json.Hooks)))
 

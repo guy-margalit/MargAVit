@@ -8,6 +8,10 @@
 
 #define MAXIMUM_ALERT_TIME ({MaximumAlertTimeS} * SECOND_IN_100_NANOSECONDS)
 
+#define ALERT_TITLE (L"{AlertTitle}")
+
+#define ALERT_DESCRIPTION (L"{AlertDescription}")
+
 #define HOOK_TYPE {HookType}
 
 #define SET_HOOKS(hooker) \

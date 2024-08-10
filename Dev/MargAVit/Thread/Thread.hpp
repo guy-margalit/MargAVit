@@ -6,7 +6,7 @@
 
 #include "AutoCloseObject/AutoCloseObject.hpp"
 
-using ThreadProc = std::function<unsigned(void*)>;
+using ThreadProc = std::function<unsigned(__stdcall)(void*)>;
 using ThreadArgs = std::pair<ThreadProc, void*>;
 using ThreadArgsUPtr = std::unique_ptr<ThreadArgs>;
 
