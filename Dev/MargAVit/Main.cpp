@@ -1,3 +1,4 @@
+#include <map>
 #include <Windows.h>
 
 #include "Common/NtDll.hpp"
@@ -14,30 +15,31 @@ static ThreadUPtr g_fake_timers_thread = nullptr;
 static ISignalWaitableUPtr g_signal_waitables[TIMERS_COUNT];
 
 static
-NTSTATUS
-NTAPI
-nt_allocate_virtual_memory_hook(
-	decltype(&NtAllocateVirtualMemory) pNtAllcoateVirtualMemory,
-	HANDLE ProcessHandle,
-	PVOID* BaseAddress,
-	ULONG ZeroBits,
-	PSIZE_T RegionSize,
-	ULONG AllocationType,
-	ULONG Protect
+BOOL
+WINAPI
+read_directory_changes_w_hook(
+	decltype(&ReadDirectoryChangesW) pReadDirectoryChangesW,
+	HANDLE hDirectory,
+	LPVOID lpBuffer,
+	DWORD nBufferLength,
+	BOOL bWatchSubtree,
+	DWORD dwNotifyFilter,
+	LPDWORD lpBytesReturned,
+	LPOVERLAPPED lpOverlapped,
+	LPOVERLAPPED_COMPLETION_ROUTINE lpCompletionRoutine
 )
 {
-	if (MEM_COMMIT == AllocationType)
-	{
-		g_signal_waitables[ALERT_TIMER_INDEX]->set();
-	}
+	g_signal_waitables[ALERT_TIMER_INDEX]->set();
 	
-	return pNtAllcoateVirtualMemory(
-		ProcessHandle,
-		BaseAddress,
-		ZeroBits,
-		RegionSize,
-		AllocationType,
-		Protect);
+	return pReadDirectoryChangesW(
+		hDirectory,
+		lpBuffer,
+		nBufferLength,
+		bWatchSubtree,
+		dwNotifyFilter,
+		lpBytesReturned,
+		lpOverlapped,
+		lpCompletionRoutine);
 }
 
 static unsigned __stdcall fake_timers_thread_enty_point(void*)
@@ -112,7 +114,7 @@ DllMain(
 		g_fake_timers_thread = std::make_unique<Thread>(fake_timers_thread_enty_point);
 
 		SET_HOOKS(DETACHED_EMPTY_HOOK);
-		DETACHED_HOOK("ntdll.dll", NtAllocateVirtualMemory, &nt_allocate_virtual_memory_hook);
+		DETACHED_HOOK("kernel32.dll", ReadDirectoryChangesW, &read_directory_changes_w_hook);
 
 		break;
 
