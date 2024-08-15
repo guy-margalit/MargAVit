@@ -8,15 +8,9 @@
   "HookType": "DetourHook",
   "Hooks": {
     "ntdll.dll": [
-      "LdrLoadDll",
-      "LdrUnloadDll",
-      "LdrGetProcedureAddress",
       "RtlAdjustPrivilege",
       "RtlGetAce",
-      "NtCreateFile",
-      "NtCreateProcess",
-      "NtQueryEvent",
-      "NtOpenKey"
+      "NtCreateProcess"
     ]
   }
 }
