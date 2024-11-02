@@ -9,10 +9,11 @@
 #include "DynamicLibrary/DynamicLibrary.hpp"
 
 static HANDLE g_alert_waitable = nullptr;
+static int64_t g_alert_due_time = 0;
 static ThreadUPtr g_alert_thread = nullptr;
 static std::wstring g_timer_names[] = TIMERS;
 static ThreadUPtr g_fake_timers_thread = nullptr;
-static ISignalWaitableUPtr g_signal_waitables[TIMERS_COUNT];
+static TimerUPtr g_signal_waitables[TIMERS_COUNT];
 
 static
 BOOL
@@ -29,7 +30,16 @@ read_directory_changes_w_hook(
 	LPOVERLAPPED_COMPLETION_ROUTINE lpCompletionRoutine
 )
 {
-	g_signal_waitables[ALERT_TIMER_INDEX]->set();
+	LARGE_INTEGER large_due_time = { 0 };
+	large_due_time.QuadPart = g_alert_due_time;
+
+	(void)SetWaitableTimer(
+		g_alert_waitable,
+		&large_due_time,
+		0,
+		nullptr,
+		nullptr,
+		false);
 	
 	return pReadDirectoryChangesW(
 		hDirectory,
@@ -109,6 +119,7 @@ DllMain(
 
 		// Put the alert waitable handle in a separate global because it'll be easier to see and track in WinDBG
 		g_alert_waitable = g_signal_waitables[ALERT_TIMER_INDEX]->get();
+		g_alert_due_time = g_signal_waitables[ALERT_TIMER_INDEX]->get_due_time();
 		
 		g_alert_thread = std::make_unique<Thread>(alert_thread_entry_point);
 		g_fake_timers_thread = std::make_unique<Thread>(fake_timers_thread_enty_point);
