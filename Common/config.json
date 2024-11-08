@@ -1,6 +1,6 @@
 {
-  "MinimumAlertTimeS": 2,
-  "MaximumAlertTimeS": 5,
+  "MinimumAlertTimeS": 6,
+  "MaximumAlertTimeS": 8,
   "TimersCount": 150,
   "AlertTimerIndex": 81,
   "AlertTitle": "ALERT",
