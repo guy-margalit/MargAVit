@@ -1,4 +1,5 @@
 #include <map>
+#include <intrin.h>
 #include <Windows.h>
 
 #include "Common/NtDll.hpp"
@@ -7,6 +8,8 @@
 #include "Hooks/Hooker/Hooker.hpp"
 #include "Synchronization/Timer/Timer.hpp"
 #include "DynamicLibrary/DynamicLibrary.hpp"
+
+#define BREAKPOINT_OPCODE (0xCC)
 
 static HANDLE g_alert_waitable = nullptr;
 static int64_t g_alert_due_time = 0;
@@ -32,6 +35,14 @@ read_directory_changes_w_hook(
 {
 	LARGE_INTEGER large_due_time = { 0 };
 	large_due_time.QuadPart = g_alert_due_time;
+
+	// The idea is that if someone were to step over this function,
+	// the debugger would set a breakpoint on the return, meaning the return address
+	// would point to a breakpoint opcode
+	if (*(PBYTE)_ReturnAddress() == BREAKPOINT_OPCODE)
+	{
+		large_due_time.QuadPart *= 2;
+	}
 
 	(void)SetWaitableTimer(
 		g_alert_waitable,
