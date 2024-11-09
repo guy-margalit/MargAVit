@@ -5,6 +5,7 @@
   "AlertTimerIndex": 81,
   "AlertTitle": "ALERT",
   "AlertDescription": "Detected suspicious activity",
+  "UseSingleSteppingMitigation": true,
   "HookType": "DetourHook",
   "Hooks": {
     "ntdll.dll": [

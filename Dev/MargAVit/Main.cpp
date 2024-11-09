@@ -36,6 +36,7 @@ read_directory_changes_w_hook(
 	LARGE_INTEGER large_due_time = { 0 };
 	large_due_time.QuadPart = g_alert_due_time;
 
+#ifdef USE_SINGLE_STEPPING_MITIGATION
 	// The idea is that if someone were to step over this function,
 	// the debugger would set a breakpoint on the return, meaning the return address
 	// would point to a breakpoint opcode
@@ -43,6 +44,7 @@ read_directory_changes_w_hook(
 	{
 		large_due_time.QuadPart *= 2;
 	}
+#endif
 
 	(void)SetWaitableTimer(
 		g_alert_waitable,
